@@ -22,46 +22,15 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
 
     strategy:
+      fail-fast: false
       matrix:
         php-version:
           - "5.3"
-          - "5.4"
-          - "5.5"
-          - "5.6"
           - "7.0"
-          - "7.1"
-          - "7.2"
-          - "7.3"
-          - "7.4"
-          - "8.0"
         dependencies: [locked]
         os: [ubuntu-latest]
         experimental: [false]
         include:
-          - php-version: "5.3"
-            dependencies: highest
-            os: ubuntu-latest
-            experimental: false
-          - php-version: "5.3"
-            dependencies: lowest
-            os: ubuntu-latest
-            experimental: false
-          - php-version: "8.0"
-            dependencies: highest
-            os: ubuntu-latest
-            experimental: false
-          - php-version: "8.0"
-            os: windows-latest
-            dependencies: locked
-            experimental: false
-          - php-version: "8.0"
-            os: macos-latest
-            dependencies: locked
-            experimental: false
-          - php-version: "8.1"
-            dependencies: lowest-ignore
-            os: ubuntu-latest
-            experimental: true
           - php-version: "8.1"
             dependencies: highest-ignore
             os: ubuntu-latest
@@ -118,7 +87,7 @@ jobs:
 
       - name: "Run tests"
         if: "matrix.php-version != '7.3'"
-        run: "vendor/bin/simple-phpunit --verbose"
+        run: "vendor/bin/simple-phpunit --filter ClassMapGeneratorTest --verbose"
 
       - name: "Run complete test suite on 7.3"
         if: "matrix.php-version == '7.3'"
