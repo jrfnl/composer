@@ -15,7 +15,7 @@
          bootstrap="tests/bootstrap.php"
 >
     <php>
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="/preg_split\(\)/"/>
         <env name="COMPOSER_TEST_SUITE" value="1"/>
     </php>
     <testsuites>
